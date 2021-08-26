@@ -15,8 +15,6 @@ class Contract(View):
     def post(self,request):
         json_dic = eval(request.body)
         getContract(json_dic)
-        # file=open('./%s互联网专线合同.docx'%json_dic['party_name'],'rb')
-        # response = StreamingHttpResponse(file)
         if not os.path.isfile('./src/file/contract/%s互联网专线合同.docx'%json_dic['party_name']):  # 判断下载文件是否存在
             return HttpResponse("Sorry but Not Found the File")
         def file_iterator(file_path):
