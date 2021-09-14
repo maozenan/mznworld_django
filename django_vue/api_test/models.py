@@ -2,8 +2,8 @@ from django.db import models
 # from __future__ import unicode_literals
 
 class Book(models.Model):
-    book_name = models.CharField(max_length=128)
-    add_time = models.DateTimeField(auto_now_add=True)
+    username = models.CharField(max_length=18,default='')
+    password = models.CharField(max_length=18,default='')
 
     def __unicode__(self):
-        return self.book_name
+        return self.username,self.password

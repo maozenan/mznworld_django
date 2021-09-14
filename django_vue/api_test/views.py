@@ -9,6 +9,8 @@ from django.views.generic import View
 from json import dumps
 import os
 from django.utils.encoding import escape_uri_path
+from api_test.models import Book
+from django.contrib import auth
 
 class Contract(View):
 
@@ -36,3 +38,19 @@ class Contract(View):
         except:
             return HttpResponse("Sorry but Not Found the File")
         return response
+
+class Login(View):
+
+    def post(self,request):
+        dic = eval(request.body)
+        print(dic)
+        user = dic['account']
+        psd = dic['pass']
+        print(user,psd)
+        user_obj = auth.authenticate(username=user, password=psd)
+        print(user_obj)
+        if not user_obj:
+            return HttpResponse('账号密码错误，请重新输入')
+        else:
+            auth.login(request, user_obj)
+            return HttpResponse('登陆成功')
