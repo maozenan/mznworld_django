@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATIC_URL = '../static' # 能够访问静态文件的URL路径
+STATIC_ROOT = os.path.join(BASE_DIR,'static') 
 
 # Application definition
 
@@ -68,6 +71,17 @@ TEMPLATES = [
     },
 ]
 
+CACHES = {
+     "default": {
+         "BACKEND": "django_redis.cache.RedisCache",
+         "LOCATION": "redis://redis:6379/1", #这里直接使用redis别名作为host ip地址
+         "OPTIONS": {
+             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+             "PASSWORD": "mzn19961023", # 换成你自己密码
+         },
+     }
+ }
+
 WSGI_APPLICATION = 'django_vue.wsgi.application'
 
 
@@ -77,11 +91,11 @@ WSGI_APPLICATION = 'django_vue.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST':'localhost',
-        'PORT':'3306',
-        'USER':'root',
+        'HOST':'db',
+        'PORT':'3307',
+        'USER':'dbuser',
         'PASSWORD':'mzn19961023',
-        'NAME': 'django_vue_db'
+        'NAME': 'myproject'
     }
 }
 

@@ -1,0 +1,15 @@
+# django
+ django==3.2.6
+ # uwsgi
+ uwsgi==2.0.18
+ # mysql
+ mysqlclient==1.4.6
+ # redis
+ django-redis==4.11.0
+ redis==3.5.0
+ # for images
+ Pillow==8.3.1
+
+ pymysql==1.0.2
+
+ python-docx==0.8.11
